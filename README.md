@@ -10,7 +10,6 @@ Angular 2, TypeScript, Spring Boot, Hibernate, MySQL
 2. Alice should be able search for restaurants that matching some combination of:
  - The name of the restaurant or a part of a name (e.g., “Maroli”).
  - Tags describing cuisine type / regional origin (e.g., “Uighur”, “Andhra”, “Russian”, “Indian”). Note that the same restaurant could be at the same time “Andhra”, “Indian”, and “Vegetarian”.
- - Specific dishes that available at the restaurant (e.g., “lasagna” or “feijoada”).
  - The search should result in a list of restaurants with a name of each restaurant and its average rating.
 
 3. Alice should be able to click on a restaurant from the list and see the following information about it:
