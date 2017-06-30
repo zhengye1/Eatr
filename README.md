@@ -32,3 +32,5 @@ and the list of all Bob's comments. The list of Bob's comments show which restau
 
 6. Alice should be able to mark Bob's comment as “helpful” or “unhelpful.” When applicable, comments 
 would be shown with a note saying something like “24 out of 32 people found this helpful.”
+
+7. If admin is logging to the site, he/she will able to perform CRUD operations on restaurants data and users' comments.
