@@ -19,7 +19,7 @@ Angular 2, TypeScript, Spring Boot, Hibernate, MySQL
   - Price range (from “$” to “$$$$$”).
   - A list of comments from visitors, which would include a rating, from one to five stars.
   - The average of visitor ratings.
-  - The menu of the restaurant
+  - ~~The menu of the restaurant~~ (@deprecated due to different restaurant has own categorized for the menu)
   - Open Hours
   - Map of the location
   
