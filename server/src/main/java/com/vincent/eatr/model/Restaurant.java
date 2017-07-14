@@ -40,12 +40,13 @@ public class Restaurant implements Serializable {
 	@OneToOne(cascade = CascadeType.ALL)
 	private Address address;
 
-	@ManyToMany
+	@ManyToMany(cascade = CascadeType.ALL)
 	@JoinTable(
 			name="Restaurant_Category",
 			joinColumns=@JoinColumn(name="Restaurant_ID", referencedColumnName="Restaurant_ID"),
 			inverseJoinColumns=@JoinColumn(name="Category_ID", referencedColumnName="Category_ID"))
 	private List<Category> category;
+	
 	public Long getId() {
 		return id;
 	}

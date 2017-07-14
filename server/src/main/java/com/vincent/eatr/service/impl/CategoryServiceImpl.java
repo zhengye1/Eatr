@@ -38,4 +38,10 @@ public class CategoryServiceImpl implements CategoryService{
 		categoryRepository.delete(id);
 	}
 
+	@Override
+	public Category findByName(String categoryName) {
+		// TODO Auto-generated method stub
+		return categoryRepository.findByCategoryName(categoryName);
+	}
+
 }

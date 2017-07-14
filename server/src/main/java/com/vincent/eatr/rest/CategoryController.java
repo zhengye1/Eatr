@@ -46,7 +46,7 @@ public class CategoryController {
 	public ResponseEntity<Category> add(@RequestBody Category category, UriComponentsBuilder ucBuilder){
 		this.categoryService.save(category);
 		HttpHeaders headers = new HttpHeaders();
-		headers.setLocation(ucBuilder.path("/api/categoy/{categoryId}").buildAndExpand(category.getId()).toUri());
+		headers.setLocation(ucBuilder.path("/api/category/{categoryId}").buildAndExpand(category.getId()).toUri());
 		return new ResponseEntity<Category>(headers, HttpStatus.CREATED);
 	}
 

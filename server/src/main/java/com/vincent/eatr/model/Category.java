@@ -22,9 +22,10 @@ public class Category implements Serializable{
     @GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 	
-	@Column(name = "Category_Name")
+	@Column(name = "Category_Name", unique=true)
 	private String categoryName;
 
+	
 	public Long getId() {
 		return id;
 	}
@@ -33,11 +34,19 @@ public class Category implements Serializable{
 		this.id = id;
 	}
 
-	public String getCategory() {
+	public String getCategoryName() {
 		return categoryName;
 	}
 
-	public void setCategory(String categoryName) {
+	public void setCategoryName(String categoryName) {
 		this.categoryName = categoryName;
 	}
+
+//	public List<Restaurant> getRestaurants() {
+//		return restaurants;
+//	}
+//
+//	public void setRestaurants(List<Restaurant> restaurants) {
+//		this.restaurants = restaurants;
+//	}
 }
