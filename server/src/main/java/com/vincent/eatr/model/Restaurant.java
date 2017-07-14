@@ -40,7 +40,7 @@ public class Restaurant implements Serializable {
 	@OneToOne(cascade = CascadeType.ALL)
 	private Address address;
 
-	@ManyToMany(cascade = CascadeType.ALL)
+	@ManyToMany(cascade = {CascadeType.PERSIST, CascadeType.DETACH})
 	@JoinTable(
 			name="Restaurant_Category",
 			joinColumns=@JoinColumn(name="Restaurant_ID", referencedColumnName="Restaurant_ID"),
