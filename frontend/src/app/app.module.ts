@@ -16,12 +16,14 @@ import 'style-loader!@angular/material/prebuilt-themes/indigo-pink.css';
 import { AppComponent } from './app.component';
 import { HeaderComponent } from './header/header.component';
 import { FooterComponent } from './footer/footer.component';
+import { RestaurantComponent } from './restaurant/restaurant.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     HeaderComponent,
-    FooterComponent
+    FooterComponent,
+    RestaurantComponent
   ],
   imports: [
     BrowserModule,
