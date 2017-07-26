@@ -30,12 +30,12 @@ public class RestaurantController {
 	@Autowired
 	RestaurantService restaurantService;
 	
-    @RequestMapping( method = GET, value= "/all")
+    @RequestMapping( method = GET, value= "/")
     public List<Restaurant> loadAll() {
         return this.restaurantService.findAll();
     }
     
-    @RequestMapping( method = GET, value= "/all/page")
+    @RequestMapping( method = GET, value= "/page")
     public List<Restaurant> loadAllPage(@PageableDefault(value=1, page=1) Pageable pageable) {
         return this.restaurantService.listAllByPage(pageable).getContent();
     }
