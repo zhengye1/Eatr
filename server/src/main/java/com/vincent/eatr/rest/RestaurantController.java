@@ -30,7 +30,7 @@ public class RestaurantController {
 	@Autowired
 	RestaurantService restaurantService;
 	
-    @RequestMapping( method = GET, value= "/")
+    @RequestMapping( method = GET)
     public List<Restaurant> loadAll() {
         return this.restaurantService.findAll();
     }

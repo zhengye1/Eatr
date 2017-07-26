@@ -1,6 +1,7 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
-
+import { AppRoutingModule } from './app-routing.module';
+import { HttpModule } from '@angular/http';
 // material
 import { MaterialModule, MdIconRegistry } from '@angular/material';
 
@@ -17,20 +18,26 @@ import { AppComponent } from './app.component';
 import { HeaderComponent } from './header/header.component';
 import { FooterComponent } from './footer/footer.component';
 import { RestaurantComponent } from './restaurant/restaurant.component';
+import { RestaurantDetailComponent } from './restaurant/restaurant-detail/restaurant-detail.component';
 
+// import service
+import { RestaurantService } from './restaurant/restaurant.service';
 @NgModule({
   declarations: [
     AppComponent,
     HeaderComponent,
     FooterComponent,
-    RestaurantComponent
+    RestaurantComponent,
+    RestaurantDetailComponent 
   ],
   imports: [
     BrowserModule,
     MaterialModule,
-    FlexLayoutModule
+    FlexLayoutModule,
+    AppRoutingModule,
+    HttpModule
   ],
-  providers: [],
+  providers: [RestaurantService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

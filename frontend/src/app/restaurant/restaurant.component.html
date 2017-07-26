@@ -1,3 +1,8 @@
-<p>
-  restaurant works!
-</p>
+<h3 style="color:green">Restaurant List:</h3>
+
+<a *ngFor="let rest of restaurants" class="col-1-4">
+  <div>
+    <h4>Id: {{rest.id}} - Name: {{rest.restaurant_name}} - Category: {{ rest.category }} - Address: {{rest.address.address}},
+      {{rest.address.city.city_name}}</h4>
+  </div>
+</a>
