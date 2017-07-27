@@ -1,0 +1,38 @@
+<div class="example-container mat-elevation-z8">
+  <md-table #table [dataSource]="dataSource">
+
+    <!--- Note that these columns can be defined in any order.
+          The actual rendered columns are set as a property on the row definition" -->
+
+    <!-- Number Column -->
+    <ng-container cdkColumnDef="Id">
+      <md-header-cell *cdkHeaderCellDef> Id </md-header-cell>
+      <md-cell *cdkCellDef="let row"> {{row.id}} </md-cell>
+    </ng-container>
+
+    <!-- Title Column -->
+    <ng-container cdkColumnDef="Name">
+      <md-header-cell *cdkHeaderCellDef> Name </md-header-cell>
+      <md-cell *cdkCellDef="let row"> {{row.name}} </md-cell>
+    </ng-container>
+
+    <!-- State Column -->
+    <ng-container cdkColumnDef="Category">
+      <md-header-cell *cdkHeaderCellDef> Category </md-header-cell>
+      <md-cell *cdkCellDef="let row"> {{row.category}} </md-cell>
+    </ng-container>
+
+    <ng-container cdkColumnDef="Address">
+      <md-header-cell *cdkHeaderCellDef> Address </md-header-cell>
+      <md-cell *cdkCellDef="let row"> {{row.address}} </md-cell>
+    </ng-container>
+
+    <ng-container cdkColumnDef="City">
+      <md-header-cell *cdkHeaderCellDef> City </md-header-cell>
+      <md-cell *cdkCellDef="let row"> {{row.city}} </md-cell>
+    </ng-container>
+
+    <md-header-row *cdkHeaderRowDef="displayedColumns"></md-header-row>
+    <md-row *cdkRowDef="let row; columns: displayedColumns;"></md-row>
+  </md-table>
+</div>

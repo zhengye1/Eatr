@@ -1,12 +1,13 @@
 import { Routes, RouterModule } from '@angular/router';
 import { NgModule } from '@angular/core';
 
+import { HomeComponent } from './home/home.component';
 import { RestaurantComponent } from './restaurant/restaurant.component';
 import { RestaurantDetailComponent } from './restaurant/restaurant-detail/restaurant-detail.component';
 
 
 const routes: Routes = [
-   { path: '', redirectTo: '/restaurant', pathMatch: 'full' },
+   { path:'', component: HomeComponent},
    { path: 'restaurant/:id', component: RestaurantDetailComponent },
    { path: 'restaurant',  component: RestaurantComponent },
 ];
