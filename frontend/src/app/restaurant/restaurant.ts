@@ -2,7 +2,7 @@ import { Address } from './address';
 import { Category } from '../category';
 
 export class Restaurant {
- categoryNames : String;
+ categoryNames : string;
   constructor(public id: number,
     public restaurant_name: String,
     public description: String,
