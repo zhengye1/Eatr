@@ -44,7 +44,7 @@ export class ExampleHttpDatabase {
       return {
         id:restaurant.id,
         name: restaurant.restaurant_name,
-        categoryNames: restaurant.categoryNames,
+        category: restaurant.category.map(c => c.categoryName).join(','),
         address : restaurant.address.address,
         city: restaurant.address.city.city_name
       }
