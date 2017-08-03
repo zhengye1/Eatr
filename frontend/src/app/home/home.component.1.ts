@@ -21,10 +21,6 @@ export class HomeComponent implements OnInit {
   exampleDatabase: ExampleHttpDatabase | null;
   dataSource: ExampleDataSource | null;
   location: CurrentLocation | null;
-  lat: any;
-  lon: any;
-  result: Promise<any>;
-  
   constructor(http: Http) {
     this.exampleDatabase = new ExampleHttpDatabase(http);
     this.dataSource = new ExampleDataSource(this.exampleDatabase);
@@ -32,11 +28,8 @@ export class HomeComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.result = this.location.getCurrentLocation(this.lat, this.lon);
-    this.result.then(function(result){
-      console.log(result._body);
-    })
-    console.log(this.lat, this.lon);
+    this.location.getCurrentLocation();
+    this.location.test();
     this.dataSource.connect();
   }
 }
@@ -82,24 +75,28 @@ export class CurrentLocation {
       });
     })
   }
-  async getCurrentLocation(lat, lon): Promise<any> {
+  async getCurrentLocation(): Promise<any> {
     let coords = await this.getPosition();
-    lat = this.lat = coords['latitude'];
-    lon = this.lon = coords['longitude'];
+    this.lat = coords['latitude'];
+    this.lon = coords['longitude'];
     this.params.set('lat', this.lat);
     this.params.set('lon', this.lon);
     var result = this.http.get(this.url, { search: this.params });
     return await result.toPromise();
   }
-}
 
+  test(){
+    this.getCurrentLocation();
+    console.log(this.lat + " " + this.lon);
+  }
+}
 export class ExampleDataSource extends DataSource<Restaurant> {
   constructor(private _exampleDatabase: ExampleHttpDatabase) {
     super();
   }
 
   /** Connect function called by the table to retrieve one stream containing the data to render. */
-  connect(): Observable<Restaurant[]> {
+  connect(): Observable<any> {
     return this._exampleDatabase.getRestaurants();
   }
 

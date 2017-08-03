@@ -40,7 +40,7 @@ public class Address implements Serializable {
 	
 	@JoinColumn(name = "City_ID")
 	@OneToOne(cascade = CascadeType.ALL)
-	private City city_id;
+	private City city;
 	
 	public Long getId() {
 		return id;
@@ -59,11 +59,11 @@ public class Address implements Serializable {
 	}
 
 	public City getCity() {
-		return city_id;
+		return city;
 	}
 
 	public void setCity(City city) {
-		this.city_id = city;
+		this.city = city;
 	}
 
 	public String getPostalCode() {

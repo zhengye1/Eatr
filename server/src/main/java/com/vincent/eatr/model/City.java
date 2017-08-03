@@ -20,7 +20,7 @@ public class City {
 	private Long id;
 	
 	@Column(name = "City_Name")
-	private String city_name;
+	private String cityName;
 
 	public Long getId() {
 		return id;
@@ -30,11 +30,11 @@ public class City {
 		this.id = id;
 	}
 
-	public String getCity_name() {
-		return city_name;
+	public String getCityName() {
+		return cityName;
 	}
 
-	public void setCity_name(String city_name) {
-		this.city_name = city_name;
+	public void setCityName(String city_name) {
+		this.cityName = city_name;
 	}
 }

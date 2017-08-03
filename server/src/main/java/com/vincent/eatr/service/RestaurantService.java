@@ -14,4 +14,6 @@ public interface RestaurantService {
 	Page<Restaurant> listAllByPage(Pageable pageable);
 	public void save(Restaurant restaurant);
 	public void deleteById(Long restaurantId);
+	public List<Restaurant> findByCity(String city);
+	public List<Restaurant> findByLatLon(float lat, float lon);
 }
