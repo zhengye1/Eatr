@@ -6,6 +6,7 @@ import { Observable } from 'rxjs/Observable';
 import 'rxjs/add/operator/startWith';
 import 'rxjs/add/observable/merge';
 import 'rxjs/add/operator/map';
+import 'rxjs/add/observable/frompromise';
 import { Restaurant } from '../restaurant/restaurant';
 import { Category } from '../category/category';
 import { RestaurantService } from '../restaurant/restaurant.service';
@@ -18,60 +19,49 @@ import { RestaurantService } from '../restaurant/restaurant.service';
 })
 export class HomeComponent implements OnInit {
   displayedColumns = ['Id', 'Name', 'Category', 'Address', 'City'];
-  exampleDatabase: ExampleHttpDatabase | null;
   dataSource: ExampleDataSource | null;
-  location: CurrentLocation | null;
-  lat: any;
-  lon: any;
-  result: Promise<any>;
-  
+
   constructor(http: Http) {
-    this.exampleDatabase = new ExampleHttpDatabase(http);
-    this.dataSource = new ExampleDataSource(this.exampleDatabase);
-    this.location = new CurrentLocation(http);
+    //this.exampleDatabase = new ExampleHttpDatabase(http, this.location);
+    this.dataSource = new ExampleDataSource(http);
+
   }
 
   ngOnInit() {
-    this.result = this.location.getCurrentLocation(this.lat, this.lon);
-    this.result.then(function(result){
-      console.log(result._body);
-    })
-    console.log(this.lat, this.lon);
     this.dataSource.connect();
   }
 }
 
-export class ExampleHttpDatabase {
-  private restaurantUrl = 'api/restaurant'; // URL to web API
-  getRestaurants(): Observable<Restaurant[]> {
-    var result = this.http.get(this.restaurantUrl)
-      .map(this.extractData);
-    result.toPromise();
-    return result;
-  }
-
-  extractData(result: Response): Restaurant[] {
-    return result.json().map(restaurant => {
-      return {
-        id: restaurant.id,
-        name: restaurant.restaurant_name,
-        category: restaurant.category.map(c => c.categoryName).join(','),
-        address: restaurant.address.address,
-        city: restaurant.address.city.city_name
-      }
-    });
-  }
-  constructor(private http: Http) { }
-}
-
-export class CurrentLocation {
-  constructor(private http: Http) { }
-  private lat: any;
-  private lon: any;
-  private params = new URLSearchParams();
+export class ExampleDataSource extends DataSource<Restaurant> {
   private url = 'api/search/location';
+  private params = new URLSearchParams();
+  private lat;
+  private lon;
+  constructor(private http: Http) {
+    super();
+  }
+
+  /** Connect function called by the table to retrieve one stream containing the data to render. */
+  connect(): Observable<Restaurant[]> {
+    // var location;
+    // if (navigator.geolocation){
+    //   var options = {timeout: 60000};
+    //   location = navigator.geolocation.getCurrentPosition((position)=>{
+    //     return position;
+    //   },(err) =>{
+    //     console.log("Error")
+    //   }, options);
+    // }
+    // console.log("Locations: " + location);
+    var result = this.getCurrentLocation().then((res) => 
+    {
+      return res;
+    });
+    return Observable.fromPromise(result);
+  }
 
 
+  disconnect() { }
   getPosition = () => {
     var latitude, longitude;
     return new Promise((resolve, reject) => {
@@ -82,26 +72,24 @@ export class CurrentLocation {
       });
     })
   }
-  async getCurrentLocation(lat, lon): Promise<any> {
+  async getCurrentLocation(): Promise<Restaurant[]> {
     let coords = await this.getPosition();
-    lat = this.lat = coords['latitude'];
-    lon = this.lon = coords['longitude'];
+    this.lat = coords['latitude'];
+    this.lon = coords['longitude'];
     this.params.set('lat', this.lat);
     this.params.set('lon', this.lon);
-    var result = this.http.get(this.url, { search: this.params });
+    var result = this.http.get(this.url, { search: this.params }).map(this.extractData);
     return await result.toPromise();
   }
-}
-
-export class ExampleDataSource extends DataSource<Restaurant> {
-  constructor(private _exampleDatabase: ExampleHttpDatabase) {
-    super();
+  extractData(result: Response): Restaurant[] {
+    return result.json().map(restaurant => {
+      return {
+        id: restaurant.id,
+        name: restaurant.restaurant_name,
+        category: restaurant.category.map(c => c.categoryName).join(','),
+        address: restaurant.address.address,
+        city: restaurant.address.city.cityName
+      }
+    });
   }
-
-  /** Connect function called by the table to retrieve one stream containing the data to render. */
-  connect(): Observable<Restaurant[]> {
-    return this._exampleDatabase.getRestaurants();
-  }
-
-  disconnect() { }
 }
