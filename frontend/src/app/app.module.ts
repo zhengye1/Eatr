@@ -58,6 +58,7 @@ import { RestaurantDetailComponent } from './restaurant/restaurant-detail/restau
 // import service
 import { RestaurantService } from './restaurant/restaurant.service';
 import { HomeComponent } from './home/home.component';
+import { LocationService } from './location/locationService.service';
 @NgModule({
   declarations: [
     AppComponent,
@@ -75,7 +76,7 @@ import { HomeComponent } from './home/home.component';
     HttpModule,
     CdkTableModule
   ],
-  providers: [RestaurantService],
+  providers: [RestaurantService, LocationService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

@@ -10,7 +10,7 @@ import 'rxjs/add/observable/frompromise';
 import { Restaurant } from '../restaurant/restaurant';
 import { Category } from '../category/category';
 import { RestaurantService } from '../restaurant/restaurant.service';
-
+import { LocationService } from '../location/locationService.service';
 
 @Component({
   selector: 'app-home',
@@ -20,16 +20,26 @@ import { RestaurantService } from '../restaurant/restaurant.service';
 export class HomeComponent implements OnInit {
   displayedColumns = ['Id', 'Name', 'Category', 'Address', 'City'];
   dataSource: ExampleDataSource | null;
-
-  constructor(http: Http) {
+  lat : Number;
+  lng : Number;
+  constructor(http: Http, private service: LocationService) {
     //this.exampleDatabase = new ExampleHttpDatabase(http, this.location);
     this.dataSource = new ExampleDataSource(http);
 
   }
 
-  ngOnInit() {
-    this.dataSource.connect();
+  async ngOnInit() {
+    await this.service.getLocation().subscribe(coordinates => {
+      this.lat = coordinates.coords.latitude;
+      this.lng = coordinates.coords.longitude;
+      console.log(coordinates);
+    });
+    
+    //await this.dataSource.setLatLon(this.lat, this.lng);
+    await this.dataSource.connect();
   }
+
+  
 }
 
 export class ExampleDataSource extends DataSource<Restaurant> {
@@ -40,6 +50,10 @@ export class ExampleDataSource extends DataSource<Restaurant> {
   constructor(private http: Http) {
     super();
   }
+
+  // setLatLon(lat: Number, lng: Number){
+  //   console.log(lat, lng);
+  // }
 
   /** Connect function called by the table to retrieve one stream containing the data to render. */
   connect(): Observable<Restaurant[]> {
