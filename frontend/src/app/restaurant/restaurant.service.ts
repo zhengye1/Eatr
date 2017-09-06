@@ -21,6 +21,11 @@ export class RestaurantService {
       .catch(this.handleError);
   }
 
+  getRestaurant(id: Number):Promise<Restaurant>{
+    return this.http.get(this.restaurantUrl + "/" + id)
+    .toPromise()
+    .then(response => response.json());
+  }
   private handleError(error: any): Promise<any> {
     console.error('Error', error);
     return Promise.reject(error.message || error);

@@ -22,19 +22,13 @@ export class HomeComponent implements OnInit {
   dataSource: ExampleDataSource | null;
   lat : Number;
   lng : Number;
-  constructor(http: Http, private service: LocationService) {
+  constructor(http: Http) {
     //this.exampleDatabase = new ExampleHttpDatabase(http, this.location);
     this.dataSource = new ExampleDataSource(http);
 
   }
 
-  async ngOnInit() {
-    await this.service.getLocation().subscribe(coordinates => {
-      this.lat = coordinates.coords.latitude;
-      this.lng = coordinates.coords.longitude;
-      console.log(coordinates);
-    });
-    
+  async ngOnInit() {   
     //await this.dataSource.setLatLon(this.lat, this.lng);
     await this.dataSource.connect();
   }
@@ -82,7 +76,8 @@ export class ExampleDataSource extends DataSource<Restaurant> {
       navigator.geolocation.getCurrentPosition((position) => {
         resolve(position.coords);
       }, (err) => {
-        reject(err);
+        resolve({'latitude': '44.0', 'longitude': '22.0'});
+        //reject(err);
       });
     })
   }

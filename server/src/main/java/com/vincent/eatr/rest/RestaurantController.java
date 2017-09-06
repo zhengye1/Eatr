@@ -6,6 +6,8 @@ import static org.springframework.web.bind.annotation.RequestMethod.DELETE;
 
 import java.util.List;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.web.PageableDefault;
@@ -26,7 +28,8 @@ import com.vincent.eatr.service.RestaurantService;
 @RestController
 @RequestMapping( value = "/api/restaurant", produces = MediaType.APPLICATION_JSON_VALUE )
 public class RestaurantController {
-
+	
+	static final Logger logger = LoggerFactory.getLogger(RestaurantController.class);
 	@Autowired
 	RestaurantService restaurantService;
 	
@@ -42,6 +45,7 @@ public class RestaurantController {
     
     @RequestMapping( method = GET, value= "/{restaurantId}")
     public Restaurant loadById(@PathVariable Long restaurantId) {
+    	logger.info("Calling loadById with id " + restaurantId);
         return this.restaurantService.findById(restaurantId);
     }
     
