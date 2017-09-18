@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
 import { Restaurant } from '../restaurant';
 import { RestaurantService } from '../restaurant.service';
 import { ActivatedRoute } from '@angular/router';
@@ -12,15 +12,16 @@ import { ActivatedRoute } from '@angular/router';
 export class RestaurantDetailComponent implements OnInit {
   id: Number;
   sub: any;
-  restaurant: Restaurant;
+  @Input() restaurant: Restaurant;
   constructor(private restaurantService: RestaurantService, private route: ActivatedRoute) { }
 
-  async ngOnInit() {
+  ngOnInit() {
     this.sub = this.route.params.subscribe(params => {
       this.id = +params['id']; // (+) converts string 'id' to a number
     });
-    await this.restaurantService.getRestaurant(this.id);
-    console.log(this.restaurant);
+    this.restaurantService.getRestaurant(this.id).then(
+      res => this.restaurant = new Restaurant(res.id, res.restaurant_name, res.description
+      , res.phone, res.address, res.category));
   }
 
 }

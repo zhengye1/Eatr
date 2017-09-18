@@ -10,7 +10,6 @@ import 'rxjs/add/observable/frompromise';
 import { Restaurant } from '../restaurant/restaurant';
 import { Category } from '../category/category';
 import { RestaurantService } from '../restaurant/restaurant.service';
-import { LocationService } from '../location/locationService.service';
 
 @Component({
   selector: 'app-home',
