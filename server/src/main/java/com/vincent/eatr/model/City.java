@@ -6,35 +6,34 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
-
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
 @Entity
 @Table(name = "City")
 public class City {
-	
-	@Id
-    @Column(name = "City_ID")
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-	@JsonIgnore
-	private Long id;
-	
-	@Column(name = "City_Name")
-	private String cityName;
 
-	public Long getId() {
-		return id;
-	}
+  @Id
+  @Column(name = "City_ID")
+  @GeneratedValue(strategy = GenerationType.IDENTITY)
+  @JsonIgnore
+  private Long id;
 
-	public void setId(Long id) {
-		this.id = id;
-	}
+  @Column(name = "City_Name")
+  private String cityName;
 
-	public String getCityName() {
-		return cityName;
-	}
+  public Long getId() {
+    return id;
+  }
 
-	public void setCityName(String city_name) {
-		this.cityName = city_name;
-	}
+  public void setId(Long id) {
+    this.id = id;
+  }
+
+  public String getCityName() {
+    return cityName;
+  }
+
+  public void setCityName(String city_name) {
+    this.cityName = city_name;
+  }
 }

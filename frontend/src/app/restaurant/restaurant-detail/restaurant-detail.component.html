@@ -1,4 +1,17 @@
 Restaurant detail page with Id: {{ id }}
-<section>
+<section *ngIf="restaurant">
    Name: {{ restaurant['restaurant_name'] }}
+   <br>
+   Description:{{ restaurant['description'] }}
+   <br>
+   Phone: {{ restaurant['phone'] }}
+   <br>
+   Address: {{ restaurant['address']['address'] }}, {{ restaurant['address']['city']['cityName'] }} 
+    {{ restaurant['address']['postalCode'] }}
+   <br>
+   Category: {{ restaurant['categoryNames'] }}
 </section>
+
+<br>
+Comments:
+<app-comment></app-comment>
