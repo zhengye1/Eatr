@@ -13,6 +13,13 @@ insert into Restaurant(Restaurant_Name, Description, Address_ID, Phone_Number) v
 
 insert into Category(Category_Name) values ('Asian'), ('Japanese');
 insert into Restaurant_Category (Restaurant_ID, Category_ID) values (1,1), (2, 1), (3,1), (4, 1),  (2, 2), (3, 2), (4, 2), (5, 1), (5, 2);
+
+insert into User(username, password, firstname, lastname) values ('admin', 'admin', 'adminF', 'adminL');
+insert into User(username, password, firstname, lastname) values ('user', 'user', 'Vincent', 'Zheng');
+
+insert into Authority(name) values ('ROLE_ADMIN'), ('ROLE_USER')
+insert into user_authority (user_id, authority_id) values (1, 1), (2, 2)
+
 --
 --insert into Category(Category_Name)
 --values 
