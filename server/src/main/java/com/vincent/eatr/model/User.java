@@ -47,7 +47,7 @@ public class User implements UserDetails, Serializable {
   private String lastname;
 
   @Temporal(TemporalType.DATE)
-  @Column(name = "register_date", columnDefinition = "default CURRENT_TIMESTAMP")
+  @Column(name = "register_date", columnDefinition = "DATE default CURRENT_TIMESTAMP")
   private Date registerDate = new Date();
 
   @ManyToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)

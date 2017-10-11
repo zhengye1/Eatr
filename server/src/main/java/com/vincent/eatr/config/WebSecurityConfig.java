@@ -12,11 +12,11 @@ import org.springframework.security.config.annotation.web.configuration.WebSecur
 import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
-import org.springframework.security.web.authentication.AuthenticationFailureHandler;
-import org.springframework.security.web.authentication.AuthenticationSuccessHandler;
 import org.springframework.security.web.authentication.www.BasicAuthenticationFilter;
 import org.springframework.security.web.csrf.CookieCsrfTokenRepository;
 import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
+import com.vincent.eatr.security.auth.AuthenticationFailureHandler;
+import com.vincent.eatr.security.auth.AuthenticationSuccessHandler;
 import com.vincent.eatr.security.auth.LogoutSuccess;
 import com.vincent.eatr.security.auth.RestAuthenticationEntryPoint;
 import com.vincent.eatr.security.auth.TokenAuthenticationFilter;
