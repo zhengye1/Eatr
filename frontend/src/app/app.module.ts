@@ -59,6 +59,7 @@ import { RestaurantDetailComponent } from './restaurant/restaurant-detail/restau
 import { RestaurantService } from './restaurant/restaurant.service';
 import { HomeComponent } from './home/home.component';
 import { CommentComponent } from './comment/comment.component';
+import { UserComponent } from './user/user.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -67,7 +68,8 @@ import { CommentComponent } from './comment/comment.component';
     RestaurantComponent,
     RestaurantDetailComponent,
     HomeComponent,
-    CommentComponent
+    CommentComponent,
+    UserComponent
   ],
   imports: [
     BrowserModule,
