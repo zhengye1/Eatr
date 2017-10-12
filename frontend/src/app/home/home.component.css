@@ -14,11 +14,12 @@
   font-size: 20px;
 }
 
-.mat-table {
+.md-table {
   overflow: auto;
+  max-height: 500px;
 }
 
-.mat-column-title {
+.md-column-title {
   text-overflow: ellipsis;
   white-space: nowrap;
   flex: 1;
@@ -26,9 +27,9 @@
 }
 
 /* Column Widths */
-.mat-column-number,
-.mat-column-state,
-.mat-column-commentCount {
+.md-column-number,
+.md-column-state,
+.md-column-commentCount {
   max-width: 64px;
 }
 
