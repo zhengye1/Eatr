@@ -7,12 +7,12 @@ import { RestaurantDetailComponent } from './restaurant/restaurant-detail/restau
 import { AdminComponent } from './admin/admin.component';
 import { LoginComponent } from './login/login.component';
 import { GuestGuard } from './guard/guest.guard';
-
+import { AdminGuard } from './guard/admin.guard';
 const routes: Routes = [
    { path:'', component: HomeComponent},
    { path: 'restaurant/:id', component: RestaurantDetailComponent },
    { path: 'restaurant',  component: RestaurantComponent },
-   { path: 'admin', component: AdminComponent},
+   { path: 'admin', component: AdminComponent, canActivate:[AdminGuard]},
    { path: 'login', component: LoginComponent, canActivate: [GuestGuard]}
 ];
  
