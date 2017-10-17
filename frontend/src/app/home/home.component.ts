@@ -14,7 +14,7 @@ import { RestaurantService } from '../restaurant/restaurant.service';
 @Component({
   selector: 'app-home',
   templateUrl: './home.component.html',
-  styleUrls: ['./home.component.css']
+  styleUrls: ['./home.component.scss']
 })
 export class HomeComponent implements OnInit {
   displayedColumns = ['Id', 'Name', 'Category', 'Address', 'City'];
@@ -44,22 +44,11 @@ export class ExampleDataSource extends DataSource<Restaurant> {
     super();
   }
 
-  // setLatLon(lat: Number, lng: Number){
-  //   console.log(lat, lng);
-  // }
+
 
   /** Connect function called by the table to retrieve one stream containing the data to render. */
   connect(): Observable<Restaurant[]> {
-    // var location;
-    // if (navigator.geolocation){
-    //   var options = {timeout: 60000};
-    //   location = navigator.geolocation.getCurrentPosition((position)=>{
-    //     return position;
-    //   },(err) =>{
-    //     console.log("Error")
-    //   }, options);
-    // }
-    // console.log("Locations: " + location);
+
     var result = this.getCurrentLocation().then((res) => 
     {
       return res;

@@ -1,57 +1,30 @@
 import { BrowserModule } from '@angular/platform-browser';
+import { NgModule, APP_INITIALIZER} from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { NgModule, APP_INITIALIZER } from '@angular/core';
-import { AppRoutingModule } from './app-routing.module';
 import { HttpModule } from '@angular/http';
 // material
 import {
-  MdAutocompleteModule,
   MdButtonModule,
-  MdButtonToggleModule,
-  MdCardModule,
-  MdCheckboxModule,
-  MdChipsModule,
-  MdCoreModule,
-  MdDatepickerModule,
-  MdDialogModule,
-  MdExpansionModule,
-  MdGridListModule,
-  MdIconModule,
-  MdIconRegistry,
-  MdInputModule,
-  MdListModule,
   MdMenuModule,
-  MdNativeDateModule,
-  MdPaginatorModule,
-  MdProgressBarModule,
-  MdProgressSpinnerModule,
-  MdRadioModule,
-  MdRippleModule,
-  MdSelectModule,
-  MdSidenavModule,
-  MdSliderModule,
-  MdSlideToggleModule,
-  MdSnackBarModule,
-  MdSortModule,
-  MdTableModule,
-  MdTabsModule,
+  MdIconModule,
   MdToolbarModule,
   MdTooltipModule,
-  MaterialModule
+  MdCardModule,
+  MdInputModule,
+  MdIconRegistry,
+  MdTableModule,
+  MdProgressSpinnerModule
 } from '@angular/material';
+
+import { AppRoutingModule } from './app-routing.module';
+
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import {CdkTableModule} from '@angular/cdk';
 
-// Browser Animation 
-import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 //flex layout
 import { FlexLayoutModule } from '@angular/flex-layout';
 
-// different theme
-//import 'style-loader!@angular/material/prebuilt-themes/pink-bluegrey.css';
-// import 'style-loader!@angular/material/prebuilt-themes/deeppurple-amber.css';
-import 'style-loader!@angular/material/prebuilt-themes/indigo-pink.css';
-// import 'style-loader!@angular/material/prebuilt-themes/purple-green.css';
 
 
 // import service
@@ -74,6 +47,8 @@ import { LoginComponent } from './login/login.component';
 
 //import guards
 import { GuestGuard } from './guard/guest.guard';
+import { LoginGuard } from './guard/login.guard';
+import { AdminGuard } from './guard/admin.guard';
 
 export function initUserFactory(userService: UserService) {
     return () => userService.initUser();
@@ -95,18 +70,28 @@ export function initUserFactory(userService: UserService) {
     LoginComponent
   ],
   imports: [
-    BrowserModule,
-    MaterialModule,
     BrowserAnimationsModule,
-    FlexLayoutModule,
-    AppRoutingModule,
-    HttpModule,
-    CdkTableModule,
+    BrowserModule,
     FormsModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    HttpModule,
+    AppRoutingModule,
+    MdMenuModule,
+    MdTooltipModule,
+    MdButtonModule,
+    MdIconModule,
+    MdInputModule,
+    MdToolbarModule,
+    MdCardModule,
+    MdProgressSpinnerModule,
+    FlexLayoutModule,
+    CdkTableModule,
+    MdTableModule
   ],
   providers: [
     GuestGuard,
+    LoginGuard,
+    AdminGuard,
     RestaurantService,
     ApiService,  
     AuthService,  

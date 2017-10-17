@@ -1,0 +1,80 @@
+
+app-api-card {
+  margin: 0 50px 0 0;
+  &.last {
+    margin: 0 0 0 0;
+  }
+}
+
+app-github {
+  margin: 50px -70px -50px;
+}
+
+@media screen and (min-width: 600px) and (max-width: 1279px) {
+  app-api-card {
+    margin: 0 4px 0 0;
+    &.last {
+      margin: 0 0 0 0;
+    }
+  }
+
+  app-github {
+    margin: 20px -30px -20px;
+  }
+}
+
+@media screen and (max-width: 599px) {
+
+  .content {
+    /* https://github.com/angular/flex-layout/issues/295 */
+    display: block !important;
+  }
+
+  app-api-card {
+    /* https://github.com/angular/flex-layout/issues/295 */
+    display: block !important;
+    margin: 0 0 12px 0;
+  }
+
+  app-github {
+    margin: 8px -12px -8px;
+  }
+
+}
+
+
+/* Structure */
+example-container {
+  display: flex;
+  flex-direction: column;
+  max-height: 500px;
+  min-width: 300px;
+}
+
+example-header {
+  min-height: 64px;
+  display: flex;
+  align-items: center;
+  padding-left: 24px;
+  font-size: 20px;
+}
+
+md-table {
+  overflow: auto;
+  max-height: 500px;
+  margin: 8px;
+}
+
+md-column-title {
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  flex: 1;
+  overflow: hidden;
+}
+
+/* Column Widths */
+md-column-number,
+md-column-state,
+md-column-commentCount {
+  max-width: 64px;
+}

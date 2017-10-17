@@ -18,7 +18,7 @@ insert into User(username, password, firstname, lastname) values ('admin', '$2a$
 insert into User(username, password, firstname, lastname) values ('user', '$2a$04$Vbug2lwwJGrvUXTj6z7ff.97IzVBkrJ1XfApfGNl.Z695zqcnPYra', 'Vincent', 'Zheng');
 
 insert into Authority(name) values ('ROLE_ADMIN'), ('ROLE_USER')
-insert into user_authority (user_id, authority_id) values (1, 1), (2, 2)
+insert into user_authority (user_id, authority_id) values (1, 1), (1, 2), (2, 2)
 
 --
 --insert into Category(Category_Name)
