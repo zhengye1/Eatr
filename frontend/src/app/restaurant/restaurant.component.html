@@ -2,7 +2,7 @@
 
 <a *ngFor="let rest of restaurants" class="col-1-4">
   <div>
-    <h4>Id: {{rest.id}} - <a [routerLink] = "['/restaurant', rest.id]">  Name: {{rest.restaurant_name}} </a>
+    <h4>Id: {{rest.id}} - <a [routerLink] = "['/restaurant', rest.id]">  Name: {{rest.restaurantName}} </a>
       - Category: {{ rest.categoryNames }} - Address: {{rest.address.address}},
       {{rest.address.city.cityName}}</h4>
   </div>

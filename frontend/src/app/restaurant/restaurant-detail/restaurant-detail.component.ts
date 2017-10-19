@@ -20,7 +20,7 @@ export class RestaurantDetailComponent implements OnInit {
       this.id = +params['id']; // (+) converts string 'id' to a number
     });
     this.restaurantService.getRestaurant(this.id).then(
-      res => this.restaurant = new Restaurant(res.id, res.restaurant_name, res.description
+      res => this.restaurant = new Restaurant(res.id, res.restaurantName, res.description
       , res.phone, res.address, res.category));
   }
 
