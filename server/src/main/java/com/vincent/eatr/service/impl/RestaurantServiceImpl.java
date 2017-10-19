@@ -31,6 +31,9 @@ public class RestaurantServiceImpl implements RestaurantService {
   @Autowired
   private CityRepository cityRepository;
 
+  private final int TABLE_SIZE = 3;
+
+
   @Override
   public List<Restaurant> findAll() {
     // TODO Auto-generated method stub
@@ -89,7 +92,7 @@ public class RestaurantServiceImpl implements RestaurantService {
       float lat2 = r.getAddress().getLatitude();
       float lon2 = r.getAddress().getLongitude();
       double dist = Util.haversine(lat, lon, lat2, lon2);
-      System.out.println(dist + "KM with Restaurant " + r.getRestaurant_name());
+      System.out.println(dist + "KM with Restaurant " + r.getRestaurantName());
       if (dist < 15) {
         resultMap.put(r, dist);
       }
@@ -105,8 +108,8 @@ public class RestaurantServiceImpl implements RestaurantService {
         Map.Entry<Restaurant, Double> e1 = (Map.Entry<Restaurant, Double>) o1;
         Map.Entry<Restaurant, Double> e2 = (Map.Entry<Restaurant, Double>) o2;
         if (e1.getValue().equals(e2.getValue())) {
-          return e1.getKey().getRestaurant_name()
-              .compareToIgnoreCase(e2.getKey().getRestaurant_name());
+          return e1.getKey().getRestaurantName()
+              .compareToIgnoreCase(e2.getKey().getRestaurantName());
         }
         return e1.getValue().compareTo(e2.getValue());
       }
@@ -120,10 +123,10 @@ public class RestaurantServiceImpl implements RestaurantService {
     for (Map.Entry<Restaurant, Double> entry : lst) {
       sortedList.add(entry.getKey());
     }
-    if (sortedList.size() <= 3) {
+    if (sortedList.size() <= TABLE_SIZE) {
       return sortedList;
     } else {
-      for (int i = 0; i < 3; i++) {
+      for (int i = 0; i < TABLE_SIZE; i++) {
         result.add(sortedList.get(i));
       }
       return result;

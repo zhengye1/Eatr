@@ -20,7 +20,7 @@ import com.vincent.eatr.security.auth.AuthenticationSuccessHandler;
 import com.vincent.eatr.security.auth.LogoutSuccess;
 import com.vincent.eatr.security.auth.RestAuthenticationEntryPoint;
 import com.vincent.eatr.security.auth.TokenAuthenticationFilter;
-import com.vincent.eatr.service.impl.CustomUserDetailsService;
+import com.vincent.eatr.service.impl.CustomUserDetailsServiceImpl;
 
 @Configuration
 @EnableGlobalMethodSecurity(prePostEnabled = true)
@@ -46,7 +46,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
   }
 
   @Autowired
-  private CustomUserDetailsService jwtUserDetailsService;
+  private CustomUserDetailsServiceImpl jwtUserDetailsService;
 
   @Autowired
   private RestAuthenticationEntryPoint restAuthenticationEntryPoint;

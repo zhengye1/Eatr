@@ -20,6 +20,7 @@ public class UserServiceImpl implements UserService {
   @Autowired
   private PasswordEncoder passwordEncoder;
 
+  @Override
   public void resetCredentials() {
     List<User> users = userRepository.findAll();
     for (User user : users) {
@@ -29,18 +30,23 @@ public class UserServiceImpl implements UserService {
   }
 
   @Override
-  // @PreAuthorize("hasRole('USER')")
+  /**
+   * @PreAuthorize("hasRole('USER')")
+   * 
+   */
   public User findByUsername(String username) throws UsernameNotFoundException {
     User u = userRepository.findByUsername(username);
     return u;
   }
 
+  @Override
   @PreAuthorize("hasRole('ADMIN')")
   public User findById(Long id) throws AccessDeniedException {
     User u = userRepository.findOne(id);
     return u;
   }
 
+  @Override
   @PreAuthorize("hasRole('ADMIN')")
   public List<User> findAll() throws AccessDeniedException {
     List<User> result = userRepository.findAll();

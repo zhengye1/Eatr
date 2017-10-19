@@ -16,7 +16,7 @@ import com.vincent.eatr.model.User;
 import com.vincent.eatr.repository.UserRepository;
 
 @Service
-public class CustomUserDetailsService implements UserDetailsService {
+public class CustomUserDetailsServiceImpl implements UserDetailsService {
 
   protected final Log LOGGER = LogFactory.getLog(getClass());
 

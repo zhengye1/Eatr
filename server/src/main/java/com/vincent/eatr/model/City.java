@@ -33,7 +33,7 @@ public class City {
     return cityName;
   }
 
-  public void setCityName(String city_name) {
-    this.cityName = city_name;
+  public void setCityName(String cityName) {
+    this.cityName = cityName;
   }
 }
