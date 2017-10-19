@@ -16,7 +16,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 import com.vincent.eatr.model.UserTokenState;
 import com.vincent.eatr.security.TokenHelper;
-import com.vincent.eatr.service.impl.CustomUserDetailsService;
+import com.vincent.eatr.service.impl.CustomUserDetailsServiceImpl;
 
 /**
  * Created by fan.jin on 2017-05-10.
@@ -27,7 +27,7 @@ import com.vincent.eatr.service.impl.CustomUserDetailsService;
 public class AuthenticationController {
 
   @Autowired
-  private CustomUserDetailsService userDetailsService;
+  private CustomUserDetailsServiceImpl userDetailsService;
 
   @Autowired
   TokenHelper tokenHelper;

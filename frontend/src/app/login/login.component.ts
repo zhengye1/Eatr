@@ -90,7 +90,7 @@ ngOnDestroy() {
     .delay(1000)
     .subscribe(data => {
       this.router.navigate([this.returnUrl]);
-      this.userService.getMyInfo().subscribe();
+      //this.userService.getMyInfo().subscribe();
     },
     error => {
       this.submitted = false;

@@ -16,7 +16,7 @@ export class RestaurantService {
     return this.http.get(this.restaurantUrl)
       .toPromise()
       .then(response => response.json().
-        map(x => new Restaurant(x.id, x.restaurant_name, x.description, x.phone, x.address,
+        map(x => new Restaurant(x.id, x.restaurantName, x.description, x.phone, x.address,
           x.category)))
       .catch(this.handleError);
   }
