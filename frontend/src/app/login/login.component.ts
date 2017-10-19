@@ -33,6 +33,7 @@ export class LoginComponent implements OnInit {
    */
   notification: DisplayMessage;
 
+  returnUrl: string;
 
   private ngUnsubscribe: Subject<void> = new Subject<void>();
 
@@ -48,6 +49,9 @@ export class LoginComponent implements OnInit {
       .subscribe((params: DisplayMessage) => {
         this.notification = params;
       });
+      // get return url from route parameters or default to '/'
+      this.returnUrl = this.route.snapshot.queryParams['returnUrl'] || '/';
+
     this.form = this.formBuilder.group({
       username: ['', Validators.compose([Validators.required, Validators.minLength(3), Validators.maxLength(64)])],
       password: ['', Validators.compose([Validators.required, Validators.minLength(3), Validators.maxLength(32)])]
@@ -85,8 +89,8 @@ ngOnDestroy() {
     // show me the animation
     .delay(1000)
     .subscribe(data => {
+      this.router.navigate([this.returnUrl]);
       this.userService.getMyInfo().subscribe();
-      this.router.navigate(['/']);
     },
     error => {
       this.submitted = false;

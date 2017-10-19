@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { Router, CanActivate } from '@angular/router';
+import { Router, CanActivate, ActivatedRouteSnapshot, RouterStateSnapshot } from '@angular/router';
 import { UserService } from '../user/user.service';
 import { Observable } from 'rxjs/Observable';
 
@@ -7,12 +7,12 @@ import { Observable } from 'rxjs/Observable';
 export class AdminGuard implements CanActivate {
   constructor(private router: Router, private userService: UserService) {}
   
-    canActivate(): boolean {
-      console.log("Line 11: " + this.userService.currentUser);
-      if (this.userService.currentUser) {
+    canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): boolean {
+      if (this.userService.currentUser && JSON.stringify(this.userService.currentUser.authorities).search("ROLE_ADMIN") !== -1) {
         return true;
       } else {
-        this.router.navigate(['/login']);
+        console.log("NOT AN ADMIN ROLE");
+        this.router.navigate(['/login'], { queryParams: { returnUrl: state.url }});
         return false;
       }
     }
