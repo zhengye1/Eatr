@@ -89,8 +89,8 @@ ngOnDestroy() {
     // show me the animation
     .delay(1000)
     .subscribe(data => {
-      this.router.navigate([this.returnUrl]);
-      //this.userService.getMyInfo().subscribe();
+      this.router.navigate([this.userService.recentRoute]);
+      this.userService.getMyInfo().subscribe();
     },
     error => {
       this.submitted = false;

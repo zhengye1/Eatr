@@ -7,6 +7,7 @@ import { ConfigService } from '../shared/config.service';
 export class UserService {
 
   currentUser;
+  recentRoute: string;
 
   constructor(
     private apiService: ApiService,
@@ -15,18 +16,21 @@ export class UserService {
 
   initUser() {
     const promise = this.apiService.anonGet(this.config.refresh_token_url).toPromise()
-    .then(res => {
-      if (res.access_token !== null) {
-        return this.getMyInfo().toPromise()
-        .then(user => {
-          this.currentUser = user;
-        });
-      }
-    })
-    .catch(() => null);
+      .then(res => {
+        if (res.access_token !== null) {
+          return this.getMyInfo().toPromise()
+            .then(user => {
+              this.currentUser = user;
+            });
+        }
+      })
+      .catch(() => null);
     return promise;
   }
 
+  setRecentRoute(recentRoute: string) {
+    this.recentRoute = recentRoute;
+  }
   resetCredentials() {
     return this.apiService.get(this.config.reset_credentials_url);
   }
