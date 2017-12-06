@@ -4,15 +4,16 @@ insert into address (address, city_id, postal_code, latitude, longitude) values 
 insert into address (address, city_id, postal_code, latitude, longitude) values ('332 Spadina Ave', 2, 'M5T 2G2', 43.65406, -79.398905);
 insert into address (address, city_id, postal_code, latitude, longitude) values ('193 Carlton St', 2, 'M5A 2K7', 43.663494, -79.370644);
 insert into address (address, city_id, postal_code, latitude, longitude) values ('1095 Ellesmere Rd', 2, 'M1P 2X2', 43.763519,  -79.286798);
+insert into address (address, city_id, postal_code, latitude, longitude) values ('399 Church St Suite 100', 2, 'M5B 2A1', 43.661610, -79.378967);
 
 insert into Restaurant(Restaurant_Name, Description, Address_ID, Phone_Number) values ('Nakamori', 'Japanese Restaurant', 1, '416-265-7111');
 insert into Restaurant(Restaurant_Name, Description, Address_ID, Phone_Number) values ('Ajisen Ramen Markham', 'Japanese Restaurant', 2, '905-604-8299');
 insert into Restaurant(Restaurant_Name, Description, Address_ID, Phone_Number) values ('Ajisen Ramen Toronto', 'Japanese Restaurant', 3, '416-977-8080');
 insert into Restaurant(Restaurant_Name, Description, Address_ID, Phone_Number) values ('Zakkushi', 'Japanese Restaurant', 4, '647-352-9455');
 insert into Restaurant(Restaurant_Name, Description, Address_ID, Phone_Number) values ('Ni-Ji Sushi', 'Japanses Restaurant', 5, '416-755-3335');
-
+insert into Restaurant(Restaurant_Name, Description, Address_ID, Phone_Number) values ('Jinya', 'Japanese Restaraurant', 6, '647-748-8988')
 insert into Category(Category_Name) values ('Asian'), ('Japanese');
-insert into Restaurant_Category (Restaurant_ID, Category_ID) values (1,1), (2, 1), (3,1), (4, 1),  (2, 2), (3, 2), (4, 2), (5, 1), (5, 2);
+insert into Restaurant_Category (Restaurant_ID, Category_ID) values (1,1), (2, 1), (3,1), (4, 1),  (2, 2), (3, 2), (4, 2), (5, 1), (5, 2), (6, 1), (6, 2);
 
 insert into User(username, password, firstname, lastname) values ('admin', '$2a$04$Vbug2lwwJGrvUXTj6z7ff.97IzVBkrJ1XfApfGNl.Z695zqcnPYra', 'adminF', 'adminL');
 insert into User(username, password, firstname, lastname) values ('user', '$2a$04$Vbug2lwwJGrvUXTj6z7ff.97IzVBkrJ1XfApfGNl.Z695zqcnPYra', 'Vincent', 'Zheng');
