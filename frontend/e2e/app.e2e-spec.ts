@@ -1,14 +1,14 @@
-import { EatrPage } from './app.po';
+import { WebUiPage } from './app.po';
 
-describe('eatr App', () => {
-  let page: EatrPage;
+describe('web-ui App', () => {
+  let page: WebUiPage;
 
   beforeEach(() => {
-    page = new EatrPage();
+    page = new WebUiPage();
   });
 
-  it('should display welcome message', () => {
+  it('should display message saying app works', () => {
     page.navigateTo();
-    expect(page.getParagraphText()).toEqual('Welcome to app!!');
+    expect(page.getParagraphText()).toContain('ANGULAR-SPRING-JWT-STARTER');
   });
 });

@@ -4,60 +4,65 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router, ActivatedRoute } from '@angular/router';
 import { DisplayMessage } from '../shared/models/display-message';
 import { Subscription } from 'rxjs/Subscription';
-import { AuthService } from '../shared/';
-import { UserService } from '../user/user.service';
-import { Observable, Subject } from 'rxjs';
-import 'rxjs/add/observable/interval';
+import {
+  UserService,
+  AuthService
+} from '../service';
+
+import { Observable } from 'rxjs/Observable';
+import { Subject } from 'rxjs/SUbject';
 
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
   styleUrls: ['./login.component.scss']
 })
-export class LoginComponent implements OnInit {
+export class LoginComponent implements OnInit, OnDestroy {
   title = 'Login';
-  githubLink = 'https://github.com/zhengye1/Eatr';
-  
+  githubLink = 'https://github.com/bfwg/angular-spring-starter';
   form: FormGroup;
 
   /**
    * Boolean used in telling the UI
    * that the form has been submitted
-   * and waiting for response
+   * and is awaiting a response
    */
   submitted = false;
 
   /**
-   * Used for displayed error message 
-   * from received form request or router
+   * Notification message from received
+   * form request or router
    */
   notification: DisplayMessage;
 
   returnUrl: string;
-
   private ngUnsubscribe: Subject<void> = new Subject<void>();
 
-  constructor(private userService: UserService,
+  constructor(
+    private userService: UserService,
     private authService: AuthService,
     private router: Router,
     private route: ActivatedRoute,
-    private formBuilder: FormBuilder) { }
+    private formBuilder: FormBuilder
+  ) {
+
+  }
 
   ngOnInit() {
     this.route.params
-      .takeUntil(this.ngUnsubscribe)
-      .subscribe((params: DisplayMessage) => {
-        this.notification = params;
-      });
-      // get return url from route parameters or default to '/'
-      this.returnUrl = this.route.snapshot.queryParams['returnUrl'] || '/';
-
+    .takeUntil(this.ngUnsubscribe)
+    .subscribe((params: DisplayMessage) => {
+      this.notification = params;
+    });
+    // get return url from route parameters or default to '/'
+    this.returnUrl = this.route.snapshot.queryParams['returnUrl'] || '/';
     this.form = this.formBuilder.group({
       username: ['', Validators.compose([Validators.required, Validators.minLength(3), Validators.maxLength(64)])],
       password: ['', Validators.compose([Validators.required, Validators.minLength(3), Validators.maxLength(32)])]
     });
   }
-ngOnDestroy() {
+
+  ngOnDestroy() {
     this.ngUnsubscribe.next();
     this.ngUnsubscribe.complete();
   }
@@ -89,8 +94,8 @@ ngOnDestroy() {
     // show me the animation
     .delay(1000)
     .subscribe(data => {
-      this.router.navigate([this.userService.recentRoute]);
       this.userService.getMyInfo().subscribe();
+      this.router.navigate([this.returnUrl]);
     },
     error => {
       this.submitted = false;
@@ -98,4 +103,6 @@ ngOnDestroy() {
     });
 
   }
+
+
 }

@@ -1,23 +1,63 @@
-import { Routes, RouterModule } from '@angular/router';
 import { NgModule } from '@angular/core';
+import { Routes, RouterModule } from '@angular/router';
+import { AppComponent } from './app.component';
+import { HomeComponent } from './home';
+import { LoginComponent } from './login';
+import { AdminComponent } from './admin';
+import { LoginGuard } from './guard';
+import { GuestGuard, AdminGuard } from './guard';
+import { NotFoundComponent } from './not-found';
+import { ChangePasswordComponent } from './change-password';
+import { ForbiddenComponent } from './forbidden';
+import { RestaurantComponent } from './restaurant'; 
+import { RestaurantDetailComponent } from './restaurant/restaurant-detail';
 
-import { HomeComponent } from './home/home.component';
-import { RestaurantComponent } from './restaurant/restaurant.component';
-import { RestaurantDetailComponent } from './restaurant/restaurant-detail/restaurant-detail.component';
-import { AdminComponent } from './admin/admin.component';
-import { LoginComponent } from './login/login.component';
-import { GuestGuard } from './guard/guest.guard';
-import { AdminGuard } from './guard/admin.guard';
-const routes: Routes = [
-   { path:'', component: HomeComponent},
-   { path: 'restaurant/:id', component: RestaurantDetailComponent },
-   { path: 'restaurant',  component: RestaurantComponent },
-   { path: 'admin', component: AdminComponent, canActivate:[AdminGuard]},
-   { path: 'login', component: LoginComponent, canActivate: [GuestGuard]}
+export const routes: Routes = [
+  {
+    path: '',
+    component: HomeComponent,
+    pathMatch: 'full'
+  },
+  {
+    path: 'login',
+    component: LoginComponent,
+    canActivate: [GuestGuard]
+  },
+  {
+    path: 'change-password',
+    component: ChangePasswordComponent,
+    canActivate: [LoginGuard]
+  },
+  {
+    path: 'admin',
+    component: AdminComponent,
+    canActivate: [AdminGuard]
+  },
+  {
+    path:'restaurant',  
+    component: RestaurantComponent
+  },
+  {
+    path:'restaurant/:id',
+    component: RestaurantDetailComponent
+  },
+  {
+    path: '404',
+    component: NotFoundComponent
+  },
+  {
+    path: '403',
+    component: ForbiddenComponent
+  },
+  {
+    path: '**',
+    redirectTo: '/404'
+  }
 ];
- 
+
 @NgModule({
-  imports: [ RouterModule.forRoot(routes) ],
-  exports: [ RouterModule ]
+  imports: [RouterModule.forRoot(routes)],
+  exports: [RouterModule],
+  providers: []
 })
-export class AppRoutingModule {}
+export class AppRoutingModule { }

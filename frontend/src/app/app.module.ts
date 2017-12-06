@@ -2,72 +2,70 @@ import { BrowserModule } from '@angular/platform-browser';
 import { NgModule, APP_INITIALIZER} from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpModule } from '@angular/http';
+import { HttpClientModule } from '@angular/common/http';
 // material
 import {
-  MdButtonModule,
-  MdMenuModule,
-  MdIconModule,
-  MdToolbarModule,
-  MdTooltipModule,
-  MdCardModule,
-  MdInputModule,
-  MdIconRegistry,
-  MdTableModule,
-  MdProgressSpinnerModule
+  MatButtonModule,
+  MatMenuModule,
+  MatIconModule,
+  MatToolbarModule,
+  MatTooltipModule,
+  MatCardModule,
+  MatInputModule,
+  MatIconRegistry,
+  MatProgressSpinnerModule,
+  MatTableModule
 } from '@angular/material';
-
-import { AppRoutingModule } from './app-routing.module';
-
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import {CdkTableModule} from '@angular/cdk';
-
-
-//flex layout
 import { FlexLayoutModule } from '@angular/flex-layout';
-
-
-
-// import service
-import { RestaurantService } from './restaurant/restaurant.service';
-import { ApiService, AuthService, ConfigService} from './shared/';
-import { UserService } from './user/user.service';
-
-// import component
 import { AppComponent } from './app.component';
-import { HeaderComponent } from './header/header.component';
-import { FooterComponent } from './footer/footer.component';
-import { RestaurantComponent } from './restaurant/restaurant.component';
-import { RestaurantDetailComponent } from './restaurant/restaurant-detail/restaurant-detail.component';
-import { HomeComponent } from './home/home.component';
-import { CommentComponent } from './comment/comment.component';
-import { UserComponent } from './user/user.component';
-import { AdminComponent } from './admin/admin.component';
-import { AccountMenuComponent } from './header/account-menu/account-menu.component';
-import { LoginComponent } from './login/login.component';
+import { AppRoutingModule } from './app-routing.module';
+import { HomeComponent } from './home';
+import { LoginComponent } from './login';
+import { LoginGuard, GuestGuard, AdminGuard } from './guard';
+import { NotFoundComponent } from './not-found';
+import { AccountMenuComponent } from './component/header/account-menu/account-menu.component';
+import {
+  HeaderComponent,
+  ApiCardComponent,
+  FooterComponent,
+  GithubComponent
+} from './component';
 
-//import guards
-import { GuestGuard } from './guard/guest.guard';
-import { LoginGuard } from './guard/login.guard';
-import { AdminGuard } from './guard/admin.guard';
+import {
+  ApiService,
+  AuthService,
+  UserService,
+  FooService,
+  ConfigService,
+  RestaurantService
+} from './service';
+import { ChangePasswordComponent } from './change-password/change-password.component';
+import { ForbiddenComponent } from './forbidden/forbidden.component';
+import { AdminComponent } from './admin/admin.component';
+import { RestaurantComponent } from './restaurant';
+import { RestaurantDetailComponent } from './restaurant/restaurant-detail/restaurant-detail.component';
 
 export function initUserFactory(userService: UserService) {
     return () => userService.initUser();
 }
-
 
 @NgModule({
   declarations: [
     AppComponent,
     HeaderComponent,
     FooterComponent,
-    RestaurantComponent,
-    RestaurantDetailComponent,
+    ApiCardComponent,
     HomeComponent,
-    CommentComponent,
-    UserComponent,
-    AdminComponent,
+    GithubComponent,
+    LoginComponent,
+    NotFoundComponent,
     AccountMenuComponent,
-    LoginComponent
+    ChangePasswordComponent,
+    ForbiddenComponent,
+    AdminComponent,
+    RestaurantComponent,
+    RestaurantDetailComponent
   ],
   imports: [
     BrowserAnimationsModule,
@@ -75,35 +73,37 @@ export function initUserFactory(userService: UserService) {
     FormsModule,
     ReactiveFormsModule,
     HttpModule,
+    HttpClientModule,
     AppRoutingModule,
-    MdMenuModule,
-    MdTooltipModule,
-    MdButtonModule,
-    MdIconModule,
-    MdInputModule,
-    MdToolbarModule,
-    MdCardModule,
-    MdProgressSpinnerModule,
-    FlexLayoutModule,
-    CdkTableModule,
-    MdTableModule
+    MatMenuModule,
+    MatTooltipModule,
+    MatButtonModule,
+    MatIconModule,
+    MatInputModule,
+    MatToolbarModule,
+    MatCardModule,
+    MatTableModule,
+    MatProgressSpinnerModule,
+    FlexLayoutModule
   ],
   providers: [
-    GuestGuard,
     LoginGuard,
+    GuestGuard,
     AdminGuard,
+    FooService,
+    AuthService,
+    ApiService,
+    UserService,
+    ConfigService,
     RestaurantService,
-    ApiService,  
-    AuthService,  
-    UserService, 
-    ConfigService, 
-    MdIconRegistry,
+    MatIconRegistry,
     {
       'provide': APP_INITIALIZER,
       'useFactory': initUserFactory,
       'deps': [UserService],
       'multi': true
-    }],
+    }
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

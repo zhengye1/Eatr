@@ -1,15 +1,14 @@
 import { Component, OnInit } from '@angular/core';
-import { Http, Response, URLSearchParams } from '@angular/http';
-import { DataSource } from '@angular/cdk';
-import { BehaviorSubject } from 'rxjs/BehaviorSubject';
+import { Restaurant } from '../shared/models/restaurant';
 import { Observable } from 'rxjs/Observable';
-import 'rxjs/add/operator/startWith';
-import 'rxjs/add/observable/merge';
-import 'rxjs/add/operator/map';
-import 'rxjs/add/observable/fromPromise';
-import { Restaurant } from '../restaurant/restaurant';
-import { Category } from '../category/category';
-import { RestaurantService } from '../restaurant/restaurant.service';
+import {MatPaginator, MatSort, MatTableDataSource} from '@angular/material';
+
+import {
+  FooService,
+  ConfigService,
+  UserService,
+  RestaurantService
+} from '../service';
 
 @Component({
   selector: 'app-home',
@@ -17,76 +16,68 @@ import { RestaurantService } from '../restaurant/restaurant.service';
   styleUrls: ['./home.component.scss']
 })
 export class HomeComponent implements OnInit {
+
+  fooResponse = {};
+  whoamIResponse = {};
+  allUserResponse = {};
   displayedColumns = ['Id', 'Name', 'Category', 'Address', 'City'];
-  dataSource: ExampleDataSource | null;
-  lat : Number;
-  lng : Number;
-  constructor(http: Http) {
-    //this.exampleDatabase = new ExampleHttpDatabase(http, this.location);
-    this.dataSource = new ExampleDataSource(http);
+  //displayedColumns = ['Name', 'Category'];
+  exampleDatabase: ExampleHttpDao | null;
+  dataSource = new MatTableDataSource();
+  constructor(
+    private config: ConfigService,
+    private fooService: FooService,
+    private userService: UserService,
+    private restaurantService: RestaurantService
+  ) { }
 
+  ngOnInit() {
+    this.exampleDatabase = new ExampleHttpDao(this.restaurantService);
+    Observable.fromPromise(this.exampleDatabase.getCurrentLocation())
+    .subscribe(data => this.dataSource.data = data);
   }
 
-  async ngOnInit() {   
-    //await this.dataSource.setLatLon(this.lat, this.lng);
-    await this.dataSource.connect();
-  }
-
-  
 }
 
-export class ExampleDataSource extends DataSource<Restaurant> {
-  private url = 'api/search/location';
-  private params = new URLSearchParams();
+export class ExampleHttpDao {
   private lat;
   private lon;
-  constructor(private http: Http) {
-    super();
+  restaurants;
+  constructor(private restaurantService: RestaurantService) {
+
   }
 
-
-
-  /** Connect function called by the table to retrieve one stream containing the data to render. */
-  connect(): Observable<Restaurant[]> {
-
-    var result = this.getCurrentLocation().then((res) => 
-    {
-      return res;
-    });
-    return Observable.fromPromise(result);
-  }
-
-
-  disconnect() { }
   getPosition = () => {
     var latitude, longitude;
     return new Promise((resolve, reject) => {
       navigator.geolocation.getCurrentPosition((position) => {
         resolve(position.coords);
       }, (err) => {
-        resolve({'latitude': '44.0', 'longitude': '22.0'});
+        resolve({ 'latitude': '44.0', 'longitude': '22.0' });
         //reject(err);
       });
     })
   }
-  async getCurrentLocation(): Promise<Restaurant[]> {
+
+  async getCurrentLocation()  {
     let coords = await this.getPosition();
     this.lat = coords['latitude'];
     this.lon = coords['longitude'];
-    this.params.set('lat', this.lat);
-    this.params.set('lon', this.lon);
-    var result = this.http.get(this.url, { search: this.params }).map(this.extractData);
+    var result = this.restaurantService.getRestaurantsByLoation(this.lat, this.lon).map(this.extractData);
     return await result.toPromise();
   }
-  extractData(result: Response): Restaurant[] {
-    return result.json().map(restaurant => {
-      return {
-        id: restaurant.id,
-        name: restaurant.restaurantName,
-        category: restaurant.category.map(c => c.categoryName).join(','),
-        address: restaurant.address.address,
-        city: restaurant.address.city.cityName
-      }
-    });
+
+  extractData(result: Response){
+    this.restaurants = result;
+    for (const res in result){
+      var restaurant = result[res];
+      this.restaurants[res] = new Restaurant(restaurant.id, restaurant.restaurantName, restaurant.description, 
+        restaurant.phone, restaurant.address, restaurant.category);
+    }
+    return this.restaurants;
+  }
+
+  getByCity(city: string) {
+    return this.restaurantService.getRestaurantByCity(city).toPromise();
   }
 }

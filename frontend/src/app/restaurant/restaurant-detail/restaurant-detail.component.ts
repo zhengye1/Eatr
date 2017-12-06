@@ -1,8 +1,7 @@
 import { Component, OnInit, Input } from '@angular/core';
-import { Restaurant } from '../restaurant';
-import { RestaurantService } from '../restaurant.service';
+import { RestaurantService } from '../../service';
 import { ActivatedRoute } from '@angular/router';
-
+import { Restaurant } from '../../shared/models/restaurant';
 
 @Component({
   selector: 'app-restaurant-detail',
@@ -12,6 +11,7 @@ import { ActivatedRoute } from '@angular/router';
 export class RestaurantDetailComponent implements OnInit {
   id: Number;
   sub: any;
+ 
   @Input() restaurant: Restaurant;
   constructor(private restaurantService: RestaurantService, private route: ActivatedRoute) { }
 
@@ -19,9 +19,12 @@ export class RestaurantDetailComponent implements OnInit {
     this.sub = this.route.params.subscribe(params => {
       this.id = +params['id']; // (+) converts string 'id' to a number
     });
-    this.restaurantService.getRestaurant(this.id).then(
-      res => this.restaurant = new Restaurant(res.id, res.restaurantName, res.description
-      , res.phone, res.address, res.category));
+    this.restaurantService.getRestaurant(this.id).subscribe(
+      res => {
+        this.restaurant = new Restaurant(res.id, res.restaurantName, 
+          res.description, res.phone, res.address, res.category);
+      }
+    )
   }
 
 }
