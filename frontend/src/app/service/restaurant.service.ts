@@ -19,8 +19,12 @@ export class RestaurantService {
   }
 
   getRestaurantsByLoation(lat: Number, lon: Number) {
-    const body = `lat=${lat}&lon=${lon}`;
-    return this.apiService.get(this.configService.search_url + '/location', body);
+    //const body = `lat=${lat}&lon=${lon}`;
+    const arg = {
+      lat: lat,
+      lon: lon
+    }
+    return this.apiService.get(this.configService.search_url + '/location', arg);
   }
 
   getRestaurantByCity(city:String){

@@ -36,7 +36,7 @@ public class User implements UserDetails, Serializable {
   @Column(name = "username")
   private String username;
 
-  @JsonIgnore
+  // @JsonIgnore
   @Column(name = "password")
   private String password;
 
@@ -47,7 +47,7 @@ public class User implements UserDetails, Serializable {
   private String lastname;
 
   @Temporal(TemporalType.DATE)
-  @Column(name = "register_date", columnDefinition = "DATE default CURRENT_TIMESTAMP")
+  @Column(name = "register_date", columnDefinition = "DATETIME default CURRENT_TIMESTAMP")
   private Date registerDate = new Date();
 
   @ManyToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
@@ -140,6 +140,13 @@ public class User implements UserDetails, Serializable {
 
   public void setRegisterDate(Date registerDate) {
     this.registerDate = registerDate;
+  }
+
+  @Override
+  public String toString() {
+    return "User [id=" + id + ", username=" + username + ", password=" + password + ", firstname="
+        + firstname + ", lastname=" + lastname + ", registerDate=" + registerDate + ", authorities="
+        + authorities + "]";
   }
 
 }

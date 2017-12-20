@@ -13,4 +13,17 @@ logging:
     com.vincent.eatr: DEBUG
     
 server:
-  port: 8082
+  port: 8080
+  
+spring:
+    jpa:
+        database-platform: org.hibernate.dialect.MySQL5Dialect
+        hibernate:
+            ddl-auto: create-drop
+        show-sql: true
+
+    datasource:
+        url: jdbc:mysql://vincentdbinstance.cpocnrvyk3vf.ca-central-1.rds.amazonaws.com:3306/eatr
+        username: zhengye1
+        password: Yukirin0715
+        driver-class-name: com.mysql.cj.jdbc.Driver
